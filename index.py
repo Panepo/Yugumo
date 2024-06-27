@@ -58,8 +58,7 @@ with gr.Blocks(
     theme=gr.themes.Soft(),
     css=".disclaimer {font-variant-caps: all-small-caps;}",
 ) as demo:
-    names = [tool.name for tool in tools]
-    gr.Markdown(f"""<h1><center>OpenVINO Agent for {str(names)}</center></h1>""")
+    gr.Markdown(f"""<h1><center>Getac Agent</center></h1>""")
     chatbot = gr.Chatbot(height=500)
     with gr.Row():
         with gr.Column():
