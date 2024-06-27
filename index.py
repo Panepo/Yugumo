@@ -1,10 +1,12 @@
 from langchain.agents import AgentExecutor, StructuredChatAgent
 from tools.math import add, multiply, exponentiate
 from tools.weather import weather
+from tools.ecr import ecr
+from tools.wiki import wikipedia
 from template import PREFIX, SUFFIX, HUMAN_MESSAGE_TEMPLATE, FORMAT_INSTRUCTIONS
 from model import ov_llm
 
-tools = [multiply, add, exponentiate, weather]
+tools = [wikipedia, weather, ecr, multiply, add, exponentiate,]
 
 agent = StructuredChatAgent.from_llm_and_tools(
     ov_llm,
