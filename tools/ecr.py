@@ -22,15 +22,15 @@ def ecr(
 
         if len(resp) > 0:
             if resp[len(resp) - 1]["STATUS"] == "K":
-                return str("the ecr status of {ecr_number} is pass")
+                return str("the ecr status is pass")
             else:
-                return str("the ecr status of {ecr_number} is on progress")
+                return str("the ecr status is on progress")
         else:
-            return str("the ecr number {ecr_number} is wrong")
+            return str("the ecr number is wrong")
 
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
-        return str("the ecr number {ecr_number} is wrong")
+        return str("the ecr number is wrong")
     except requests.exceptions.ConnectionError as conn_err:
         print(f"Error connecting: {conn_err}")
         return str("please check the network status")
