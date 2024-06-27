@@ -1,6 +1,7 @@
 from langchain_core.tools import tool
 import requests
 
+
 @tool
 def weather(
     city_name: str,
