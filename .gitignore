@@ -159,5 +159,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-Mistral-7B-Instruct-v0.3-ov-int4
+models
 test.py
