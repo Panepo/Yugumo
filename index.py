@@ -1,9 +1,7 @@
-import os
 import gradio as gr
 from agent import agent_executor, tools
 from model import ov_llm
 
-os.environ["TF_ENABLE_ONEDNN_OPTS"] = 0
 
 def partial_text_processor(partial_text, new_text):
     """
