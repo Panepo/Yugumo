@@ -3,7 +3,7 @@ from tools.math import add, multiply, exponentiate
 from tools.weather import weather
 from tools.ecr import ecr
 from tools.wiki import wikipedia
-from template import PREFIX, SUFFIX, HUMAN_MESSAGE_TEMPLATE, FORMAT_INSTRUCTIONS
+from prompts.openvino import PREFIX, SUFFIX, HUMAN_MESSAGE_TEMPLATE, FORMAT_INSTRUCTIONS
 from model import ov_llm
 
 tools = [wikipedia, weather, ecr, multiply, add, exponentiate,]
