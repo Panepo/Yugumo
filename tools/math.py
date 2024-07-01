@@ -17,17 +17,20 @@ def multiply(first_int: int, second_int: int) -> int | str:
 
 
 @tool
-def add(first_int: int, second_int: int) -> int | str:
+def add(first_int: int | str, second_int: int | str) -> int | str:
     """
     Add two integers.
     """
 
     if not isinstance(first_int, int):
+        print("FQ")
         return "The first integer must be a number"
 
     if not isinstance(second_int, int):
+        print("FQQ")
         return "The second integer must be a number"
 
+    print(first_int + second_int)
     return first_int + second_int
 
 
