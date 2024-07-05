@@ -1,15 +1,11 @@
-import model as ov
-from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
+from langchain_community.llms import HuggingFacePipeline
 from transformers.generation.stopping_criteria import (
     StoppingCriteriaList,
     StoppingCriteria,
 )
 
-device = "GPU"
-ov_config = {"PERFORMANCE_HINT": "LATENCY", "NUM_STREAMS": "1", "CACHE_DIR": ""}
 stop_tokens = ["Observation:"]
-model_path = "models/Mistral-7B-Instruct-v0.3-ov-int4"
-
+model_path = "hfmodels/Mistral-7B-Instruct-v0.3-ov-int4"
 
 class StopSequenceCriteria(StoppingCriteria):
     """
@@ -39,12 +35,6 @@ class StopSequenceCriteria(StoppingCriteria):
 ov_llm = HuggingFacePipeline.from_model_id(
     model_id=model_path,
     task="text-generation",
-    backend="openvino",
-    model_kwargs={
-        "device": device,
-        "ov_config": ov_config,
-        "trust_remote_code": True,
-    },
     pipeline_kwargs={"max_new_tokens": 2048},
 )
 ov_llm = ov_llm.bind(skip_prompt=True, stop=["Observation:"])

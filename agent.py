@@ -4,8 +4,8 @@ from tools.weather import weather
 from tools.ecr import ecr
 from tools.wiki import wikipedia
 from tools.license import license_plate_query
-from prompts.openvino import PREFIX, SUFFIX, HUMAN_MESSAGE_TEMPLATE, FORMAT_INSTRUCTIONS
-from model import ov_llm
+from prompt import PREFIX, SUFFIX, HUMAN_MESSAGE_TEMPLATE, FORMAT_INSTRUCTIONS
+from models.ovmodel import ov_llm
 
 tools = [wikipedia, weather, ecr, license_plate_query, multiply, add, exponentiate,]
 
