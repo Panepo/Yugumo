@@ -42,7 +42,6 @@ ov_llm = HuggingFacePipeline.from_model_id(
     model_kwargs={
         "device": device,
         "ov_config": ov_config,
-        "trust_remote_code": True,
     },
     pipeline_kwargs={"max_new_tokens": 2048},
 )

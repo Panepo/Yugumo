@@ -35,6 +35,7 @@ class StopSequenceCriteria(StoppingCriteria):
 hf_llm = HuggingFacePipeline.from_model_id(
     model_id=model_path,
     task="text-generation",
+    device_map="auto",  # Automatically distribute across multiple GPUs
     pipeline_kwargs={"max_new_tokens": 2048},
 )
 hf_llm = hf_llm.bind(skip_prompt=True, stop=["Observation:"])
