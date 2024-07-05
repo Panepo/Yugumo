@@ -5,7 +5,7 @@ from transformers.generation.stopping_criteria import (
 )
 
 stop_tokens = ["Observation:"]
-model_path = "hfmodels/Mistral-7B-Instruct-v0.3-ov-int4"
+model_path = "models/hfmodels/Mistral-7B-Instruct-v0.3"
 
 class StopSequenceCriteria(StoppingCriteria):
     """
@@ -32,14 +32,14 @@ class StopSequenceCriteria(StoppingCriteria):
         )
 
 
-ov_llm = HuggingFacePipeline.from_model_id(
+hf_llm = HuggingFacePipeline.from_model_id(
     model_id=model_path,
     task="text-generation",
     pipeline_kwargs={"max_new_tokens": 2048},
 )
-ov_llm = ov_llm.bind(skip_prompt=True, stop=["Observation:"])
+hf_llm = hf_llm.bind(skip_prompt=True, stop=["Observation:"])
 
-tokenizer = ov_llm.pipeline.tokenizer
-ov_llm.pipeline._forward_params["stopping_criteria"] = StoppingCriteriaList(
+tokenizer = hf_llm.pipeline.tokenizer
+hf_llm.pipeline._forward_params["stopping_criteria"] = StoppingCriteriaList(
     [StopSequenceCriteria(stop_tokens, tokenizer)]
 )
