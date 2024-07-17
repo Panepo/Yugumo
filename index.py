@@ -1,5 +1,5 @@
 import gradio as gr
-from agent import agent_executor
+from agentTool import agent_executor
 from models.ovmodel import ov_llm
 
 def partial_text_processor(partial_text, new_text):
