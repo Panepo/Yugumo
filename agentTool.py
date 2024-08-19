@@ -1,11 +1,12 @@
 from langchain.agents import AgentExecutor, StructuredChatAgent
-from tools.math import add, multiply, exponentiate
 from tools.weather import weather
 from tools.wiki import wikipedia
+from tools.srdd import srdd_query
+from tools.math import add, multiply, exponentiate
 from prompts.promptTool import PREFIX, SUFFIX, HUMAN_MESSAGE_TEMPLATE, FORMAT_INSTRUCTIONS
 from models.ovmodel import ov_llm
 
-tools = [wikipedia, weather]
+tools = [wikipedia, weather, srdd_query, add, multiply, exponentiate]
 
 #approval_handler = HumanApprovalCallbackHandler()
 

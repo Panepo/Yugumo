@@ -1,4 +1,4 @@
-from langchain_community.llms import HuggingFacePipeline
+from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
 from transformers.generation.stopping_criteria import (
     StoppingCriteriaList,
     StoppingCriteria,
