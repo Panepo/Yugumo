@@ -163,3 +163,4 @@ archive
 ovmodels
 hfmodels
 test.py
+*.json

@@ -1,13 +1,13 @@
-from agentTool import agent_executor
+from agentGPT import process_chat
+from langchain_core.messages import HumanMessage, AIMessage
+
+chat_history = []
 
 while 1:
-    print("================================================")
-    text = input("Please say something: ")
-    # agent_executor.invoke({"input": {text}})
-
-    for new_text in agent_executor.stream(
-        {"input": {text}},
-    ):
-        if "output" in new_text.keys():
-            print("================================================")
-            print(new_text["output"])
+  print("================================================")
+  text = input("Please say something: ")
+  response = process_chat(text, chat_history)
+  chat_history.append(HumanMessage(content=text))
+  chat_history.append(AIMessage(content=response))
+  print("================================================")
+  print(response['output'])
