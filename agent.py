@@ -1,8 +1,8 @@
 from langchain.agents import create_openai_functions_agent, create_structured_chat_agent, AgentExecutor
+from langchain.prompts import ChatPromptTemplate
 from tools.weather import weather
 from tools.wiki import wikipedia
-from tools.device import device_query
-from prompts.promptGPT import prompt
+
 from dotenv import load_dotenv
 import os
 
@@ -11,7 +11,14 @@ load_dotenv()
 backend = os.getenv("BACKEND")
 verbose = True if os.getenv("VERBOSE") == "true" else False
 
-tools = [wikipedia, weather, device_query]
+tools = [wikipedia, weather]
+
+prompt = ChatPromptTemplate(
+  system="You are a helpful assistant with access to the following tools: Wikipedia and Weather. You are tasked with assisting the user in their queries.",
+  tools="Tools: {tools}",
+  user="User: {input}",
+  assistant="Assistant:"
+)
 
 if backend == "cuda" or backend == "cpu":
   from models.modelHF import hf_llm
