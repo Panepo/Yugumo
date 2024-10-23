@@ -5,11 +5,12 @@ import os
 import time
 
 load_dotenv()
-
 backend = os.getenv("BACKEND")
 
 if backend == "openvino":
   from agentOV import process_chat
+elif backend == "cuda" or backend == "cpu":
+  from agent import process_chat
 else:
   raise ValueError(f"Unknown backend: {backend}")
 

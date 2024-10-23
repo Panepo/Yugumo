@@ -1,6 +1,18 @@
 import gradio as gr
-from agentOV import agentExecutor
-from models.modelOV import ov_llm
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+backend = os.getenv("BACKEND")
+
+if backend == "openvino":
+  from agentOV import agentExecutor
+  from models.modelOV import ov_llm
+elif backend == "cuda" or backend == "cpu":
+  from agent import agentExecutor
+  from models.modelHF import hf_llm
+else:
+  raise ValueError(f"Unknown backend: {backend}")
 
 def partial_text_processor(partial_text, new_text):
     """
@@ -51,7 +63,10 @@ def bot(history):
 
 
 def request_cancel():
-    ov_llm.pipeline.model.request.cancel()
+    if backend == "openvino":
+      ov_llm.pipeline.model.request.cancel()
+    elif backend == "cuda" or backend == "cpu":
+      hf_llm.pipeline.model.request.cancel()
 
 
 with gr.Blocks(

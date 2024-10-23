@@ -3,7 +3,6 @@ from tools.weather import weather
 from tools.wiki import wikipedia
 from tools.device import device_query
 from prompts.promptGPT import prompt
-
 from dotenv import load_dotenv
 import os
 
