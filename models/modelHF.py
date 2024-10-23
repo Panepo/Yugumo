@@ -16,4 +16,4 @@ stop_tokens = ["Observation:"]
 model_path = "./models/hfmodels/Mistral-7B-Instruct-v0.3/"
 
 tokenizer = AutoTokenizer.from_pretrained(model_path)
-model = AutoModelForCausalLM.from_pretrained(model_path)
+hf_llm = AutoModelForCausalLM.from_pretrained(model_path)
