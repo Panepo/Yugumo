@@ -1,5 +1,5 @@
 import gradio as gr
-from agentOV import agent_executor
+from agentOV import agentExecutor
 from models.modelOV import ov_llm
 
 def partial_text_processor(partial_text, new_text):
@@ -41,7 +41,7 @@ def bot(history):
     """
     partial_text = ""
 
-    for new_text in agent_executor.stream(
+    for new_text in agentExecutor.stream(
         {"input": history[-1][0]},
     ):
         if "output" in new_text.keys():

@@ -7,7 +7,7 @@ from transformers.generation.stopping_criteria import (
 device = "GPU"
 ov_config = {"PERFORMANCE_HINT": "LATENCY", "NUM_STREAMS": "1", "CACHE_DIR": ""}
 stop_tokens = ["Observation:"]
-model_path = "models/ovmodels/Mistral-7B-Instruct-v0.3-ov-int4"
+model_path = "./models/ovmodels/Mistral-7B-Instruct-v0.3-ov-int4/"
 
 
 class StopSequenceCriteria(StoppingCriteria):

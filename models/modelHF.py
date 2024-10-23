@@ -3,9 +3,21 @@ from transformers.generation.stopping_criteria import (
     StoppingCriteriaList,
     StoppingCriteria,
 )
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+backend = os.getenv("BACKEND")
+
+if backend == "cuda":
+  device = "cuda"
+elif backend == "cpu":
+  device = "cpu"
+else:
+  raise ValueError(f"Unknown backend: {backend}")
 
 stop_tokens = ["Observation:"]
-model_path = "models/hfmodels/Mistral-7B-Instruct-v0.3"
+model_path = "./models/hfmodels/Mistral-7B-Instruct-v0.3/"
 
 class StopSequenceCriteria(StoppingCriteria):
     """
@@ -33,10 +45,10 @@ class StopSequenceCriteria(StoppingCriteria):
 
 
 hf_llm = HuggingFacePipeline.from_model_id(
-    model_id=model_path,
-    task="text-generation",
-    device_map="auto",  # Automatically distribute across multiple GPUs
-    pipeline_kwargs={"max_new_tokens": 2048},
+  model_id=model_path,
+  task="text-generation",
+  device_map=device,
+  pipeline_kwargs={"max_new_tokens": 2048},
 )
 hf_llm = hf_llm.bind(skip_prompt=True, stop=["Observation:"])
 
