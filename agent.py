@@ -2,7 +2,7 @@ from langchain.agents import create_openai_functions_agent, create_structured_ch
 from langchain.prompts import ChatPromptTemplate
 from tools.weather import weather
 from tools.wiki import wikipedia
-from prompts.promptOv import FORMAT_INSTRUCTIONS
+from prompts.promptHF import FORMAT_INSTRUCTIONS
 
 from dotenv import load_dotenv
 import os
