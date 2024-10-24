@@ -13,12 +13,11 @@ verbose = True if os.getenv("VERBOSE") == "true" else False
 
 tools = [wikipedia, weather]
 
-prompt = ChatPromptTemplate([
-  ("system", "You are a helpful assistant with access to the following tools: Wikipedia and Weather. You are tasked with assisting the user in their queries."),
-  ("tools", "Tools: {tools}"),
-  ("user", "User: {input}"),
-  ("assistant", "Assistant:")
-])
+prompt = ChatPromptTemplate(
+  system="Respond to the human as helpfully and accurately as possible. You have access to the following tools: {tools}",
+  tools=tools,
+  tool_names=[tool.name for tool in tools]
+)
 
 if backend == "cuda" or backend == "cpu":
   from models.modelHF import hf_llm
