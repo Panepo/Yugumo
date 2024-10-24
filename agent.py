@@ -13,10 +13,11 @@ verbose = True if os.getenv("VERBOSE") == "true" else False
 
 tools = [wikipedia, weather]
 
-prompt = ChatPromptTemplate(
-  system="Respond to the human as helpfully and accurately as possible. You have access to the following tools: {tools}",
-  tools=tools,
-  tool_names=[tool.name for tool in tools]
+prompt = ChatPromptTemplate.from_messages(
+  [
+    ("system", "Respond to the human as helpfully and accurately as possible. You have access to the following tools: {tools}"),
+    ("human", "{input}")
+  ]
 )
 
 if backend == "cuda" or backend == "cpu":
