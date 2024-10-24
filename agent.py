@@ -2,6 +2,7 @@ from langchain.agents import create_openai_functions_agent, create_structured_ch
 from langchain.prompts import ChatPromptTemplate
 from tools.weather import weather
 from tools.wiki import wikipedia
+from prompts.promptOv import FORMAT_INSTRUCTIONS
 
 from dotenv import load_dotenv
 import os
@@ -15,8 +16,8 @@ tools = [wikipedia, weather]
 
 prompt = ChatPromptTemplate.from_messages(
   [
-    ("system", "Respond to the human as helpfully and accurately as possible. You have access to the following tools: {tools}"),
-    ("human", "{input}")
+    ("system", FORMAT_INSTRUCTIONS),
+    ("human", "{input}\n\n{agent_scratchpad}")
   ]
 )
 
