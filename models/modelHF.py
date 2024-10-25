@@ -50,7 +50,9 @@ tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForCausalLM.from_pretrained(model_path, device_map=device, load_in_4bit=bit4, torch_dtype="auto")
 pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=2048)
 hf_llm = HuggingFacePipeline(pipeline=pipe)
-
+hf_llm = hf_llm.bind(skip_prompt=True, stop=["Observation:"])
 hf_llm.pipeline._forward_params["stopping_criteria"] = StoppingCriteriaList(
     [StopSequenceCriteria(stop_tokens, tokenizer)]
 )
+
+
