@@ -1,10 +1,12 @@
-from langchain_core.language_models import BaseLanguageModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import pipeline
+from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 backend = os.getenv("BACKEND")
+bit4 = True if os.getenv("BIT4") == 'true' else False
 
 if backend == "cuda":
   device = "cuda"
@@ -18,15 +20,5 @@ model_path = "./models/hfmodels/Mistral-7B-Instruct-v0.3/"
 
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForCausalLM.from_pretrained(model_path)
-
-class LLM(BaseLanguageModel):
-    def __init__(self, model, tokenizer):
-        self.model = model
-        self.tokenizer = tokenizer
-
-    def generate(self, prompt):
-        inputs = self.tokenizer(prompt, return_tensors="pt")
-        outputs = self.model.generate(**inputs)
-        return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-
-hf_llm = LLM(model, tokenizer)
+pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=200)
+hf_llm = HuggingFacePipeline(pipeline=pipe)
