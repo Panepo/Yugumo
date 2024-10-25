@@ -19,6 +19,6 @@ stop_tokens = ["Observation:"]
 model_path = "./models/hfmodels/Mistral-7B-Instruct-v0.3/"
 
 tokenizer = AutoTokenizer.from_pretrained(model_path)
-model = AutoModelForCausalLM.from_pretrained(model_path)
-pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=200)
+model = AutoModelForCausalLM.from_pretrained(model_path, device_map=device, load_in_4bit=bit4, torch_dtype="auto")
+pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=200, device=device, stop_token=stop_tokens)
 hf_llm = HuggingFacePipeline(pipeline=pipe)
